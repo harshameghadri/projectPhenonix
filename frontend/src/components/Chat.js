@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Send, Loader, AlertCircle, CheckCircle } from 'lucide-react';
+import { Send, Loader, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { vitaeApi } from '../services/api';
 import MessageBubble from './MessageBubble';
@@ -136,6 +136,11 @@ function Chat() {
     scrollToBottom();
   }, [messages]);
 
+  // Debug: Log agentStatus changes
+  useEffect(() => {
+    console.log('AgentStatus changed to:', agentStatus);
+  }, [agentStatus]);
+
   // Check agent health on mount
   useEffect(() => {
     checkAgentHealth();
@@ -144,7 +149,10 @@ function Chat() {
 
   const checkAgentHealth = async () => {
     try {
+      console.log('Checking agent health...');
       const health = await vitaeApi.checkHealth();
+      console.log('Health response:', health);
+      console.log('Setting agent status to:', health.status);
       setAgentStatus(health.status);
     } catch (error) {
       console.error('Health check failed:', error);

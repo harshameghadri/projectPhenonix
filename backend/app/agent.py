@@ -21,7 +21,10 @@ from langchain.schema.runnable import RunnablePassthrough
 from langchain.schema.output_parser import StrOutputParser
 from langchain.vectorstores import Chroma
 from langchain.retrievers.multi_vector import MultiVectorRetriever
-from google.cloud import translate_v2 as translate
+try:
+    from google.cloud import translate_v2 as translate
+except ImportError:
+    translate = None
 
 logger = logging.getLogger(__name__)
 
@@ -130,9 +133,11 @@ class VitaeAgent:
         # Initialize Google Translate client (optional)
         self.translator = None
         try:
-            if os.getenv("GOOGLE_APPLICATION_CREDENTIALS"):
+            if translate and os.getenv("GOOGLE_APPLICATION_CREDENTIALS"):
                 self.translator = translate.Client()
                 logger.info("Google Translate initialized")
+            else:
+                logger.info("Google Translate not configured (translation disabled)")
         except Exception as e:
             logger.warning(f"Google Translate not available: {e}")
         
