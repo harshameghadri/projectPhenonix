@@ -4,12 +4,14 @@ An intelligent, conversational digital professional persona that answers questio
 
 ## 🌟 Features
 
-- **Intelligent Conversations**: Chat naturally about professional background, projects, and skills
-- **Source Citations**: Every response is backed by verifiable sources from your documents
-- **Multi-language Support**: Converse in multiple languages with automatic translation
-- **Real-time Processing**: Instant responses with comprehensive context understanding
-- **Modern UI**: Beautiful, responsive React interface with smooth animations
-- **Document Processing**: Supports PDFs, text files, blog posts, and GitHub repositories
+- **🤖 Local & Cloud AI**: Support for both Ollama (local, free) and OpenAI (cloud) models
+- **💬 Intelligent Conversations**: Chat naturally about professional background, projects, and skills
+- **📚 Source Citations**: Every response is backed by verifiable sources from your documents
+- **🌍 Multi-language Support**: Converse in multiple languages with automatic translation
+- **⚡ Real-time Processing**: Instant responses with comprehensive context understanding
+- **🎨 Modern UI**: Beautiful, responsive React interface with smooth animations
+- **📄 Document Processing**: Supports PDFs, text files, blog posts, and GitHub repositories
+- **🔒 Privacy-First**: Use local models for complete data privacy and no API costs
 
 ## 🏗️ Architecture
 
@@ -17,8 +19,9 @@ An intelligent, conversational digital professional persona that answers questio
 - **FastAPI**: High-performance REST API with automatic documentation
 - **LangChain**: Advanced RAG pipeline with document processing
 - **ChromaDB**: Vector database for semantic search
-- **OpenAI GPT-4**: Intelligent response generation
-- **Google Translate**: Multi-language support
+- **Ollama/OpenAI**: Local or cloud-based intelligent response generation
+- **HuggingFace/OpenAI**: Local or cloud-based embeddings
+- **Google Translate**: Multi-language support (optional)
 
 ### Frontend (React)
 - **React 18**: Modern component-based UI
@@ -32,8 +35,30 @@ An intelligent, conversational digital professional persona that answers questio
 ### Prerequisites
 - Python 3.11+
 - Node.js 18+
-- OpenAI API key
+- **Choose one:**
+  - **Local Setup**: Ollama installed (recommended, free)
+  - **Cloud Setup**: OpenAI API key
 - Google Cloud credentials (optional, for translation)
+
+### 🆓 Local Setup (Recommended - No API Costs)
+
+For completely free, local AI without API limits, see **[OLLAMA_SETUP.md](OLLAMA_SETUP.md)** for detailed instructions.
+
+**Quick Ollama Setup:**
+```bash
+# Install Ollama
+curl -fsSL https://ollama.com/install.sh | sh
+
+# Start Ollama
+ollama serve
+
+# Download a model (in another terminal)
+ollama pull llama3.1:8b
+
+# Configure VitaeAgent for local use
+cp .env.example .env
+# Set MODEL_PROVIDER=ollama in .env
+```
 
 ### 1. Environment Setup
 
